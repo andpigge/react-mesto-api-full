@@ -1,0 +1,15 @@
+.header__link-auth {
+  font-family: Inter;
+  color: white;
+  font-size: 18px;
+  line-height: 22px;
+  min-height: 22px;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 384px) {
+  .header__button-auth {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

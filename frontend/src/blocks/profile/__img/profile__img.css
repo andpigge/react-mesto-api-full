@@ -1,0 +1,14 @@
+.profile__img {
+  display: block;
+  background-color: #C4C4C4;
+  border-radius: 50%;
+  object-fit: cover;
+  width: inherit;
+  height: inherit;
+  background-position: 'center';
+  background-size: 'cover';
+}
+
+.profile__img:hover {
+  opacity: .8;
+}

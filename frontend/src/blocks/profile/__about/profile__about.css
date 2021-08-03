@@ -1,0 +1,12 @@
+.profile__about {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  grid-area: about;
+}
+
+@media screen and (max-width: 506px) {
+  .profile__about {
+    margin: 0 auto 36px;
+  }
+}

@@ -1,0 +1,8 @@
+.popup__icon-status {
+  display: flex;
+  width: 120px;
+  height: 120px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 60px auto 32px;
+}

@@ -1,0 +1,13 @@
+.popup__form-label {
+  margin-bottom: 30px;
+}
+
+.popup__form-label:last-of-type {
+  margin-bottom: 48px;
+}
+
+@media screen and (max-width: 480px) {
+  .popup__form-label:last-of-type {
+    margin-bottom: 45px;
+  }
+}

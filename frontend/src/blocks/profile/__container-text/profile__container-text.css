@@ -1,0 +1,10 @@
+.profile__container-text {
+  margin-right: 18px;
+  max-width: 400px;
+}
+
+@media screen and (max-width: 384px) {
+  .profile__container-text {
+    max-width: 226px;
+  }
+}

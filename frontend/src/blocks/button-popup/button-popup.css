@@ -1,0 +1,29 @@
+.button-popup {
+  border: none;
+  width: 100%;
+  max-width: 358px;
+  min-height: 50px;
+  padding: 0 20px;
+  background-color: black;
+  border-radius: 2px;
+  cursor: pointer;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: white;
+  transition: background-color 0.3s ease;
+  margin-bottom: 37px;
+}
+
+.button-popup:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+@media screen and (max-width: 480px) {
+  .button-popup {
+    font-size: 14px;
+    line-height: 17px;
+    margin-bottom: 25px;
+  }
+}

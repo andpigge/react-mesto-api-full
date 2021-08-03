@@ -1,0 +1,17 @@
+.auth {
+  display: flex;
+  flex-direction: column;
+  max-width: 358px;
+  width: 100%;
+  background-image: url(../../images/gif/background-auth.gif);
+  background-repeat: no-repeat;
+  background-size: 100% 187px;
+  background-position: center 190px;
+}
+
+@media screen and (max-width: 401px) {
+  .auth {
+    box-sizing: border-box;
+    padding: 0 30px;
+  }
+}

@@ -1,0 +1,7 @@
+.place {
+  box-sizing: border-box;
+  padding-left: 19px;
+  padding-right: 19px;
+  width: 100%;
+  max-width: 918px;
+}

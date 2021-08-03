@@ -1,0 +1,16 @@
+.card-place__title {
+  font-family: "Inter", sans-serif;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  color: black;
+  grid-area: title;
+  max-width: 200px;
+  margin: 25px auto 31px 21px;
+  /* Незнакомые свойства */
+  /* Определяет параметры видимости текста в блоке. ellipsis - текст обрезается и к концу строки добавляется многоточие. */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  grid-column: 1 / 3;
+}

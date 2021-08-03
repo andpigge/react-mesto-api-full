@@ -1,0 +1,25 @@
+.profile {
+  box-sizing: border-box;
+  padding-left: 19px;
+  padding-right: 19px;
+  width: 100%;
+  max-width: 918px;
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (max-width: 801px) {
+  .profile {
+    display: grid;
+    grid-template-areas: "link-img about" "add-card-place add-card-place";
+    justify-content: center;
+    row-gap: 24px;
+  }
+}
+
+@media screen and (max-width: 506px) {
+  .profile {
+    grid-template-areas: "link-img" "about" "add-card-place";
+    row-gap: 0;
+  }
+}

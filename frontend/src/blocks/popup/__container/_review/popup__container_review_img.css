@@ -1,0 +1,7 @@
+.popup__container_review_img {
+  max-width: 75vw;
+  box-shadow: none;
+  border-radius: 0;
+  background-color: transparent;
+  width: auto;
+}

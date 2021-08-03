@@ -1,0 +1,15 @@
+.auth__form-button {
+  max-width: 358px;
+  width: 100%;
+  height: 50px;
+  border: none;
+  background-color: white;
+  box-sizing: border-box;
+  border-radius: 2px;
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  cursor: pointer;
+  margin-bottom: 15px;
+}

@@ -1,0 +1,13 @@
+.popup__form-edit-profile {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  border: none;
+  margin: 0 36px;
+}
+
+@media screen and (max-width: 480px) {
+  .popup__form-edit-profile {
+    margin: 0 22px;
+  }
+}

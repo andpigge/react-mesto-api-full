@@ -1,0 +1,17 @@
+.profile__subtitle-does {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: white;
+}
+
+@media screen and (max-width: 385px) {
+  .profile__subtitle-does {
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    max-width: 282px;
+  }
+}
