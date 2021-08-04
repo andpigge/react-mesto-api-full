@@ -18,7 +18,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { CardListContext } from '../contexts/cardListContext';
 import { LogicsAllPopups } from '../contexts/logicsAllPopups';
 
-/* import { appUrl } from '../utils/constants'; */
+import { appUrl } from '../utils/constants';
 
 // HOC
 import ProtectedRoute from './ProtectedRoute';
@@ -83,7 +83,7 @@ function App() {
         .then(res => {
           localStorage.setItem('email', res.data.email);
           setLoggedIn(true);
-          history.push(`/mesto`);
+          history.push(`${appUrl}/mesto`);
         });
     }
   }, []);
@@ -154,7 +154,7 @@ function App() {
 
   const signOut = () => {
     localStorage.removeItem('jwt');
-    history.push(`/signin`);
+    history.push(`${appUrl}/signin`);
     setLoggedIn(false);
   }
 
@@ -164,22 +164,22 @@ function App() {
         <LogicsAllPopups.Provider value={ popups } >
           <Switch>
 
-            <ProtectedRoute path={`/mesto`} loggedIn={loggedIn} signOut={signOut}
+            <ProtectedRoute path={`${appUrl}/mesto`} loggedIn={loggedIn} signOut={signOut}
             setStateUser={setCurrentUser} setStateCards={setCardList} component={Mesto}
             />
 
-            <Route path={`$/signup`}>
+            <Route path={`${appUrl}/signup`}>
               <Register />
             </Route>
-            <Route path={`/signin`}>
+            <Route path={`${appUrl}/signin`}>
               <Login handleLogin={handleLogin} />
             </Route>
 
             <Route path='*'>
               { loggedIn ? (
-                <Redirect to={`/mesto`} />
+                <Redirect to={`${appUrl}/mesto`} />
                 ) : (
-                <Redirect to={`/signin`} />
+                <Redirect to={`${appUrl}/signin`} />
               )}
             </Route>
             {/* <Route path='*'>
