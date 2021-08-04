@@ -19,6 +19,6 @@ const apiServeAuth = {
   }
 };
 
-const appUrl = '/mesto-react';
+// const appUrl = '/mesto-react';
 
-export { apiServeMesto, apiServeAuth, appUrl };
+export { apiServeMesto, apiServeAuth/* , appUrl  */};
