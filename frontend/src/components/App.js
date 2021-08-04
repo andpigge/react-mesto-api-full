@@ -83,7 +83,8 @@ function App() {
         .then(res => {
           localStorage.setItem('email', res.data.email);
           setLoggedIn(true);
-          history.push(`/mesto-react/mesto`);
+          // Убрал appUrl `${appUrl}/signin`
+          history.push(`/mesto`);
         });
     }
   }, []);
@@ -154,7 +155,8 @@ function App() {
 
   const signOut = () => {
     localStorage.removeItem('jwt');
-    history.push(`/mesto-react/signin`);
+    // Убрал appUrl `${appUrl}/signin`
+    history.push(`/signin`);
     setLoggedIn(false);
   }
 
@@ -164,22 +166,26 @@ function App() {
         <LogicsAllPopups.Provider value={ popups } >
           <Switch>
 
-            <ProtectedRoute path={`/mesto-react/mesto`} loggedIn={loggedIn} signOut={signOut}
+            {/* Убрал appUrl `${appUrl}/signin` */}
+            <ProtectedRoute path={`/mesto`} loggedIn={loggedIn} signOut={signOut}
             setStateUser={setCurrentUser} setStateCards={setCardList} component={Mesto}
             />
 
-            <Route path={`/mesto-react/signup`}>
+            {/* Убрал appUrl `${appUrl}/signin` */}
+            <Route path={`/signup`}>
               <Register />
             </Route>
-            <Route path={`/mesto-react/signin`}>
+            {/* Убрал appUrl `${appUrl}/signin` */}
+            <Route path={`/signin`}>
               <Login handleLogin={handleLogin} />
             </Route>
 
+            {/* Убрал appUrl `${appUrl}/signin` */}
             <Route path='*'>
               { loggedIn ? (
-                <Redirect to={`/mesto-react/mesto`} />
+                <Redirect to={`/mesto`} />
                 ) : (
-                <Redirect to={`/mesto-react/signin`} />
+                <Redirect to={`/signin`} />
               )}
             </Route>
             {/* <Route path='*'>
