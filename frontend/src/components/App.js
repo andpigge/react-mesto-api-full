@@ -77,7 +77,6 @@ function App() {
   const history = useHistory();
 
   useEffect(() => {
-    console.log(1)
     const token = localStorage.getItem('jwt');
     if (token && !loggedIn) {
       checkTokenApi(token)

@@ -38,10 +38,12 @@ const { PORT = 3000 } = process.env;
 const app = express();
 
 const allowedCors = [
-  'http://mestobackend.nomoredomains.club/',
-  'https://mestobackend.nomoredomains.club/',
-  'http://mestofrontend.nomoredomains.club/',
-  'https://mestofrontend.nomoredomains.club/',
+  'http://mestobackend.nomoredomains.club',
+  'https://mestobackend.nomoredomains.club',
+  'http://mestofrontend.nomoredomains.club',
+  'https://mestofrontend.nomoredomains.club',
+  'mestofrontend.nomoredomains.club',
+  'mestofrontend.nomoredomains.club',
 ];
 
 // Обработка CORS
