@@ -1,9 +1,11 @@
+import React from 'react';
 import logo from '../images/logo.svg';
 import { Link, useRouteMatch } from 'react-router-dom';
 
 import { appUrl } from '../utils/constants';
 
 function Header({ loggedIn, signOut }) {
+
   const { url } = useRouteMatch()
 
   const checkUrl = () => {
@@ -17,7 +19,9 @@ function Header({ loggedIn, signOut }) {
       return (
         <>
           <p className='header__email'>
-            {localStorage.getItem('email')}
+            {
+              localStorage.getItem('email')
+            }
           </p>
           <Link to={`${appUrl}/signin`} className='header__link-auth' style={{ color: '#A9A9A9' }} onClick={signOut}>
             Выйти

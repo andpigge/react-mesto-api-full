@@ -77,8 +77,9 @@ function App() {
   const history = useHistory();
 
   useEffect(() => {
+    console.log(1)
     const token = localStorage.getItem('jwt');
-    if (token) {
+    if (token && !loggedIn) {
       checkTokenApi(token)
         .then(res => {
           localStorage.setItem('email', res.data.email);

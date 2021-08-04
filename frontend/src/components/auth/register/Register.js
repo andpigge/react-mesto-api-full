@@ -31,7 +31,7 @@ function Register() {
       email: authEmail
     })
     .then(res => {
-      localStorage.setItem('email', res.email);
+      // , res.email);
       setFieldValue({
         authEmail: '',
         authPassword: ''
