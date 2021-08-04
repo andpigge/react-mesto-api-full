@@ -39,8 +39,9 @@ const app = express();
 
 const allowedCors = [
   'http://mestobackend.nomoredomains.club/',
-  'http://localhost:3000',
-  'http://localhost:3001',
+  'https://mestobackend.nomoredomains.club/',
+  'http://mestofrontend.nomoredomains.club/',
+  'https://mestofrontend.nomoredomains.club/',
 ];
 
 // Обработка CORS
