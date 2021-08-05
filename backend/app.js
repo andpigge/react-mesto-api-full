@@ -37,25 +37,27 @@ const { PORT = 3000 } = process.env;
 
 const app = express();
 
-const allowedCors = [
-  'http://mestobackend.nomoredomains.club',
-  'https://mestobackend.nomoredomains.club',
-  'http://mestofrontend.nomoredomains.club',
-  'https://mestofrontend.nomoredomains.club',
-  'mestofrontend.nomoredomains.club',
-  'mestofrontend.nomoredomains.club',
-];
+// const allowedCors = [
+//   'http://mestobackend.nomoredomains.club',
+//   'https://mestobackend.nomoredomains.club',
+//   'http://mestofrontend.nomoredomains.club',
+//   'https://mestofrontend.nomoredomains.club',
+//   'mestofrontend.nomoredomains.club',
+//   'mestofrontend.nomoredomains.club',
+// ];
 
 // Обработка CORS
 app.use((req, res, next) => {
-  const { origin } = req.headers;
+  // const { origin } = req.headers;
   const { method } = req;
   const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
   const requestHeaders = req.headers['access-control-request-headers'];
 
-  if (allowedCors.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-  }
+  res.header('Access-Control-Allow-Origin', '*');
+  // В тренажере написано что эта команда должна работать, но она работает через раз
+  // if (allowedCors.includes(origin)) {
+  //   res.header('Access-Control-Allow-Origin', 'origin');
+  // }
 
   if (method === 'OPTIONS') {
     res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);

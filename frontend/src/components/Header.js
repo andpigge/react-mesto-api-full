@@ -2,18 +2,22 @@ import React from 'react';
 import logo from '../images/logo.svg';
 import { Link, useRouteMatch } from 'react-router-dom';
 
-import { appUrl } from '../utils/constants';
+// import { appUrl } from '../utils/constants';
 
 function Header({ loggedIn, signOut }) {
 
   const { url } = useRouteMatch()
 
   const checkUrl = () => {
-    if (url === `${appUrl}/signup`) {
-      return <Link to={`${appUrl}/signin`} className='header__link-auth'>Войти</Link>;
+    /* Убрал appUrl `${appUrl}/signup` */
+    if (url === `/signup`) {
+      /* Убрал appUrl `${appUrl}/signup` */
+      return <Link to={`/signin`} className='header__link-auth'>Войти</Link>;
     }
-    else if (url === `${appUrl}/signin`) {
-      return <Link to={`${appUrl}/signup`} className='header__link-auth'>Регистрация</Link>;
+    /* Убрал appUrl `${appUrl}/signup` */
+    else if (url === `/signin`) {
+      /* Убрал appUrl `${appUrl}/signup` */
+      return <Link to={`/signup`} className='header__link-auth'>Регистрация</Link>;
     }
     else if (loggedIn) {
       return (
@@ -23,7 +27,8 @@ function Header({ loggedIn, signOut }) {
               localStorage.getItem('email')
             }
           </p>
-          <Link to={`${appUrl}/signin`} className='header__link-auth' style={{ color: '#A9A9A9' }} onClick={signOut}>
+          {/* Убрал appUrl `${appUrl}/signup` */}
+          <Link to={`/signin`} className='header__link-auth' style={{ color: '#A9A9A9' }} onClick={signOut}>
             Выйти
           </Link>
         </>
@@ -33,10 +38,12 @@ function Header({ loggedIn, signOut }) {
 
   return (
     <header className='header page__position-center page__header'>
-      <Link to={`${appUrl}/mesto`} target="_self" className="header__link">
+      {/* Убрал appUrl `${appUrl}/signup` */}
+      <Link to={`/mesto`} target="_self" className="header__link">
         <img src={logo} alt="Место Россия" className="header__logo" />
       </Link>
       {checkUrl()}
+      {123}
     </header>
   );
 }
