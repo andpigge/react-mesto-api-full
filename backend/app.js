@@ -54,12 +54,12 @@ const app = express();
 // Обработка CORS
 // Не работает на сервере
 app.use((req, res, next) => {
-  // const { origin } = req.headers;
+  const { origin } = req.headers;
   const { method } = req;
   const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
   const requestHeaders = req.headers['access-control-request-headers'];
 
-  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', origin);
   // В тренажере написано что эта команда должна работать, но она работает через раз
   // if (allowedCors.includes(origin)) {
   //   res.header('Access-Control-Allow-Origin', 'origin');
