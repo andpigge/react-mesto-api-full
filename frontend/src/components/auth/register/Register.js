@@ -39,7 +39,8 @@ function Register() {
       setRegIn(true);
       // Единственный вариант, так как history.push() перенаправляет сразу, не дав переписать состояние
       setTimeout(() => {
-        history.push(`${appUrl}/signin`);
+        // Убрал `${appUrl}/signin`
+        history.push(`/signin`);
         closeAllPopups();
       }, 1000);
     })
@@ -69,7 +70,8 @@ function Register() {
           </button>
           <p className='auth__desc'>
             Уже зарегистрированы?
-            <Link to={`${appUrl}/signin`} className='auth__link'>
+            {/* Убрал `${appUrl}/signin` */}
+            <Link to={`/signin`} className='auth__link'>
               &nbsp;Войти
             </Link>
           </p>

@@ -43,7 +43,6 @@ function Header({ loggedIn, signOut }) {
         <img src={logo} alt="Место Россия" className="header__logo" />
       </Link>
       {checkUrl()}
-      {123}
     </header>
   );
 }

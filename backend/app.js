@@ -3,7 +3,6 @@ require('dotenv').config();
 
 const express = require('express');
 const mongoose = require('mongoose');
-// const cors = require('cors');
 
 // Защита заголовков
 const helmet = require('helmet');
@@ -38,32 +37,24 @@ const { PORT = 3000 } = process.env;
 
 const app = express();
 
-// const allowedCors = [
-//   'http://mestobackend.nomoredomains.club',
-//   'https://mestobackend.nomoredomains.club',
-//   'http://mestofrontend.nomoredomains.club',
-//   'https://mestofrontend.nomoredomains.club',
-//   'https://localhost:3000',
-//   'https://localhost:3001',
-// ];
-
-// app.use(cors({
-//   origin: '*',
-// }));
+const allowedCors = [
+  'http://mestobackend.nomoredomains.club',
+  'http://mestofrontend.nomoredomains.club',
+  'https://mestobackend.nomoredomains.club',
+  'https://mestofrontend.nomoredomains.club',
+];
 
 // Обработка CORS
-// Не работает на сервере
 app.use((req, res, next) => {
   const { origin } = req.headers;
   const { method } = req;
   const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
   const requestHeaders = req.headers['access-control-request-headers'];
 
-  res.header('Access-Control-Allow-Origin', origin);
   // В тренажере написано что эта команда должна работать, но она работает через раз
-  // if (allowedCors.includes(origin)) {
-  //   res.header('Access-Control-Allow-Origin', 'origin');
-  // }
+  if (allowedCors.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
 
   if (method === 'OPTIONS') {
     res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
@@ -99,6 +90,13 @@ app.use(cookieParser());
 
 // Логгер запросов подключаю до всех маршрутов.
 app.use(requestLogger);
+
+// Краш сервера. После ревью удалить
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 // Экспортирую маршруты
 app.use('/users', auth, routerUsers);

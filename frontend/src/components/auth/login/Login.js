@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { LogicsAllPopups } from '../../../contexts/logicsAllPopups';
 
 import { signInApi } from '../../../utils/auth';
-import { appUrl } from '../../../utils/constants';
+// import { appUrl } from '../../../utils/constants';
 
 function Login({ handleLogin }) {
 
@@ -44,9 +44,10 @@ function Login({ handleLogin }) {
         setLogIn(true);
         // Единственный вариант, так как history.push() перенаправляет сразу, не дав переписать состояние
         setTimeout(() => {
-          history.push(`${appUrl}/mesto`);
+          // Убрал ${appUrl}/mesto`
+          history.push(`/mesto`);
           closeAllPopups();
-        }, 2000);
+        }, 1000);
       }
     })
     .catch(rej => {
