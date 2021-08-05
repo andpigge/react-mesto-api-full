@@ -3,7 +3,7 @@ require('dotenv').config();
 
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
+// const cors = require('cors');
 
 // Защита заголовков
 const helmet = require('helmet');
@@ -47,31 +47,31 @@ const app = express();
 //   'https://localhost:3001',
 // ];
 
-app.use(cors({
-  origin: '*',
-}));
+// app.use(cors({
+//   origin: '*',
+// }));
 
 // Обработка CORS
 // Не работает на сервере
-// app.use((req, res, next) => {
-//   // const { origin } = req.headers;
-//   const { method } = req;
-//   const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
-//   const requestHeaders = req.headers['access-control-request-headers'];
+app.use((req, res, next) => {
+  // const { origin } = req.headers;
+  const { method } = req;
+  const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
+  const requestHeaders = req.headers['access-control-request-headers'];
 
-//   res.header('Access-Control-Allow-Origin', '*');
-//   // В тренажере написано что эта команда должна работать, но она работает через раз
-//   // if (allowedCors.includes(origin)) {
-//   //   res.header('Access-Control-Allow-Origin', 'origin');
-//   // }
+  res.header('Access-Control-Allow-Origin', '*');
+  // В тренажере написано что эта команда должна работать, но она работает через раз
+  // if (allowedCors.includes(origin)) {
+  //   res.header('Access-Control-Allow-Origin', 'origin');
+  // }
 
-//   if (method === 'OPTIONS') {
-//     res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
-//     res.header('Access-Control-Allow-Headers', requestHeaders);
-//     return res.end();
-//   }
-//   return next();
-// });
+  if (method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
+    res.header('Access-Control-Allow-Headers', requestHeaders);
+    return res.end();
+  }
+  return next();
+});
 
 // Подключение к серверу MongoDB
 mongoose.connect('mongodb://localhost:27017/mestodb', {
