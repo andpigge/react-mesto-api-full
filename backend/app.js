@@ -70,6 +70,10 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useUnifiedTopology: true,
 });
 
+// Логгер запросов подключаю до всех маршрутов.
+// Подключается перед limiter, так как тот не записывает запросы в log, которые отклонил
+app.use(requestLogger);
+
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // за 15 минут
   max: 100, // можно совершить максимум 100 запросов с одного IP
@@ -85,9 +89,6 @@ app.use(express.json());
 
 // Подключаем cookieParser как мидлвэа
 app.use(cookieParser());
-
-// Логгер запросов подключаю до всех маршрутов.
-app.use(requestLogger);
 
 // Краш сервера. После ревью удалить
 app.get('/crash-test', () => {

@@ -22,7 +22,7 @@ router.get('/', getUsers);
 // celebrate должен заворачивать такие запросы до передачи их контроллеру
 router.get('/:userId', celebrate({
   body: Joi.object().keys({
-    id: Joi.string().hex().length(24),
+    userId: Joi.string().hex().length(24),
   }),
 }), getUserId);
 

@@ -26,7 +26,7 @@ router.post('/', celebrate({
 // celebrate должен заворачивать такие запросы до передачи их контроллеру
 router.delete('/:cardId', celebrate({
   body: Joi.object().keys({
-    id: Joi.string().hex().length(24),
+    cardId: Joi.string().hex().length(24),
   }),
 }), deleteCardId);
 
@@ -35,14 +35,14 @@ router.delete('/:cardId', celebrate({
 // http://localhost:3000/cards/60e59c7cc4b37e5e9847dd8a/likes
 router.put('/:cardId/likes', celebrate({
   body: Joi.object().keys({
-    id: Joi.string().hex().length(24),
+    cardId: Joi.string().hex().length(24),
   }),
 }), addLikeCard);
 
 // Убрать лайк с карточки
 router.delete('/:cardId/likes', celebrate({
   body: Joi.object().keys({
-    id: Joi.string().hex().length(24),
+    cardId: Joi.string().hex().length(24),
   }),
 }), removeLikeCard);
 
