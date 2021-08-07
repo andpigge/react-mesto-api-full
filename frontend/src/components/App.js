@@ -88,7 +88,7 @@ function App() {
           history.push(`/mesto`);
         });
     }
-  }, []);
+  }, [loggedIn]);
 
   // Закрытие попапов по нажатии на esc
   useEffect(() => {
