@@ -76,9 +76,10 @@ function App() {
 
   const history = useHistory();
 
+  // Заход на сайт
   useEffect(() => {
     const token = localStorage.getItem('jwt');
-    if (token && !loggedIn) {
+    if (token) {
       checkTokenApi(token)
         .then(res => {
           localStorage.setItem('email', res.data.email);

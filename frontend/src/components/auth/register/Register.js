@@ -4,7 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import Header from '../../Header';
 import Auth from '../Auth';
 
-import { appUrl } from '../../../utils/constants';
+// import { appUrl } from '../../../utils/constants';
 import { registerApi } from '../../../utils/auth';
 
 import { LogicsAllPopups } from '../../../contexts/logicsAllPopups';
@@ -31,24 +31,22 @@ function Register() {
       email: authEmail
     })
     .then(res => {
-      // , res.email);
       setFieldValue({
         authEmail: '',
         authPassword: ''
       });
       setRegIn(true);
+      history.push(`/signin`);
       // Единственный вариант, так как history.push() перенаправляет сразу, не дав переписать состояние
-      setTimeout(() => {
-        // Убрал `${appUrl}/signin`
-        history.push(`/signin`);
-        closeAllPopups();
-      }, 1000);
+      // setTimeout(() => {
+      //   // Убрал `${appUrl}/signin`
+      //   history.push(`/signin`);
+      //   closeAllPopups();
+      // }, 1000);
     })
     .catch(rej => {
       // Возвращается промис в ошибку
       setRegIn(false);
-    })
-    .finally(() => {
       handAuthClick();
     });
   }

@@ -6,7 +6,12 @@ import { Link, useRouteMatch } from 'react-router-dom';
 
 function Header({ loggedIn, signOut }) {
 
-  const { url } = useRouteMatch()
+  const { url } = useRouteMatch();
+
+  // Беру свежий токен из localStorage
+  const updateToken = () => {
+    return localStorage.getItem('email');
+  }
 
   const checkUrl = () => {
     /* Убрал appUrl `${appUrl}/signup` */
@@ -24,7 +29,8 @@ function Header({ loggedIn, signOut }) {
         <>
           <p className='header__email'>
             {
-              localStorage.getItem('email')
+              // localStorage.getItem('email')
+              updateToken()
             }
           </p>
           {/* Убрал appUrl `${appUrl}/signup` */}

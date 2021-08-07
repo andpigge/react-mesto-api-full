@@ -20,7 +20,7 @@ function Login({ handleLogin }) {
   const [logIn, setLogIn] = useState(false);
 
   // Контекст
-  const { handAuthClick, closeAllPopups } = useContext(LogicsAllPopups);
+  const { handAuthClick/* , closeAllPopups */ } = useContext(LogicsAllPopups);
 
   const history = useHistory();
 
@@ -42,20 +42,19 @@ function Login({ handleLogin }) {
         });
         handleLogin();
         setLogIn(true);
+        history.push(`/mesto`);
         // Единственный вариант, так как history.push() перенаправляет сразу, не дав переписать состояние
-        setTimeout(() => {
-          // Убрал ${appUrl}/mesto`
-          history.push(`/mesto`);
-          closeAllPopups();
-        }, 1000);
+        // setTimeout(() => {
+        //   // Убрал ${appUrl}/mesto`
+        //   history.push(`/mesto`);
+        //   closeAllPopups();
+        // }, 1);
       }
     })
     .catch(rej => {
       setLogIn(false);
-    })
-    .finally(() => {
       handAuthClick();
-    });
+    })
   }
 
   const setValueFields = e => {
