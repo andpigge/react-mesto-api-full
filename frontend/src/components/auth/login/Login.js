@@ -22,11 +22,14 @@ function Login({ handleLogin }) {
   // Контекст
   const { handAuthClick/* , closeAllPopups */ } = useContext(LogicsAllPopups);
 
+  const [isLoadingData, setIsLoadingData] = useState(false);
+
   const history = useHistory();
 
   // Сработает при нажатии на кнопку вход, при авторизации
   const submitForm = e => {
     e.preventDefault();
+    setIsLoadingData(true);
 
     // Запрос к Api сервера
     signInApi({
@@ -54,6 +57,8 @@ function Login({ handleLogin }) {
     .catch(rej => {
       setLogIn(false);
       handAuthClick();
+      // Компоненты удалятся сами. finally не надо. В случае ошибки false добавиться
+      setIsLoadingData(false);
     })
   }
 
@@ -70,7 +75,7 @@ function Login({ handleLogin }) {
           <input type='email' name='authEmail' className='auth__field-text' placeholder='Email' required onChange={setValueFields} value={ authEmail } />
           <input type='password' name='authPassword' className='auth__field-text' placeholder='Пароль' required onChange={setValueFields} value={ authPassword } />
           <button className='auth__form-button'>
-            Войти
+            {isLoadingData ? 'Войти...' : 'Войти'}
           </button>
         </form>
       </Auth>

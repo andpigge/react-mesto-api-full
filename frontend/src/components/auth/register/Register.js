@@ -11,6 +11,8 @@ import { LogicsAllPopups } from '../../../contexts/logicsAllPopups';
 
 function Register() {
 
+  const [isLoadingData, setIsLoadingData] = useState(false);
+
   const [fieldValue, setFieldValue] = useState({
     authEmail: '',
     authPassword: ''
@@ -20,12 +22,14 @@ function Register() {
   const [regIn, setRegIn] = useState(false);
 
   // Контекст
-  const { handAuthClick, closeAllPopups } = useContext(LogicsAllPopups);
+  const { handAuthClick/* , closeAllPopups */ } = useContext(LogicsAllPopups);
 
   const history = useHistory();
 
   const submitForm = e => {
     e.preventDefault();
+    setIsLoadingData(true);
+
     registerApi({
       password: authPassword,
       email: authEmail
@@ -48,7 +52,9 @@ function Register() {
       // Возвращается промис в ошибку
       setRegIn(false);
       handAuthClick();
-    });
+      // Компоненты удалятся сами. finally не надо. В случае ошибки false добавиться
+      setIsLoadingData(false);
+    })
   }
 
   const setValueFields = e => {
@@ -64,7 +70,7 @@ function Register() {
           <input type='email' name='authEmail' className='auth__field-text' placeholder='Email' required onChange={setValueFields} value={ authEmail } />
           <input type='password' name='authPassword' className='auth__field-text' placeholder='Пароль' required onChange={setValueFields} value={ authPassword } />
           <button className='auth__form-button'>
-            Зарегистрироваться
+            {isLoadingData ? 'Зарегистрироваться...' : 'Зарегистрироваться'}
           </button>
           <p className='auth__desc'>
             Уже зарегистрированы?
