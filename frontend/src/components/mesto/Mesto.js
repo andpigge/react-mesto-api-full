@@ -49,10 +49,14 @@ function Mesto({ setStateUser, setStateCards, loggedIn, signOut }) {
   };
 
   const handleAddPlaceSubmit = ({ name, link }) => {
+    setIsLoadingData(true);
     Api.postAddCard(name, link)
       .then(newCard => {
         setStateCards([newCard.data, ...cardList]);
         closeAllPopups();
+      })
+      .finally(() => {
+        setIsLoadingData(false);
       });
   };
 

@@ -1,6 +1,7 @@
 // Для каждого отдельного сервера, свой apiServe объект
 const apiServeMesto = {
-  CONECT_SERVER: 'https://mestobackend.nomoredomains.club',
+  // CONECT_SERVER: 'https://mestobackend.nomoredomains.club',
+  CONECT_SERVER: 'http://localhost:3000',
   PATHS: {
     user: 'users/me',
     cards: 'cards',
@@ -9,7 +10,8 @@ const apiServeMesto = {
 };
 
 const apiServeAuth = {
-  CONECT_SERVER: 'https://mestobackend.nomoredomains.club',
+  // CONECT_SERVER: 'https://mestobackend.nomoredomains.club',
+  CONECT_SERVER: 'http://localhost:3000',
   PATHS: {
     reg: 'signup',
     login: 'signin',
