@@ -8,7 +8,6 @@
   width: 100%;
   max-width: 918px;
   position: relative;
-  padding-top: 45px;
   padding-bottom: 41px;
 }
 
@@ -31,6 +30,6 @@
 
 @media screen and (max-width: 384px) {
   .header {
-    padding: 28px 27px 30px 27px;
+    padding: 0 27px 30px 27px;
   }
 }

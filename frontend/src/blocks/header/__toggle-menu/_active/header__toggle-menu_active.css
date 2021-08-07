@@ -1,0 +1,19 @@
+.header__toggle-menu_active  {
+  background-image: none;
+  width: 30px;
+  height: 30px;
+}
+
+.header__toggle-menu_active::after {
+  transform: rotate(-45deg) translateY(-50%);
+  top: 50%;
+  left: 2px;
+  width: 30px;
+}
+
+.header__toggle-menu_active::before {
+  transform: rotate(45deg) translateY(-50%);
+  top: 50%;
+  left: 0;
+  width: 30px;
+}

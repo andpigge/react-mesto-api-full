@@ -1,0 +1,5 @@
+.menu-mobile_active {
+  visibility: visible;
+  min-height: 120px;
+  opacity: 1;
+}
