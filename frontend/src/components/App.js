@@ -168,6 +168,7 @@ function App() {
           <Switch>
 
             {/* Убрал appUrl `${appUrl}/signin` */}
+            {/* HOC. Создаем лишний компонент */}
             <ProtectedRoute path={`/mesto`} loggedIn={loggedIn} signOut={signOut}
             setStateUser={setCurrentUser} setStateCards={setCardList} component={Mesto}
             />
