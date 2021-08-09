@@ -9,9 +9,11 @@ const checkMaxLengthInput = (string, maxLength) => {
 
 // Проверяет все ли символы латинские или кириллические
 const checkInputСorrect = (string) => {
-  const stringRegex = /^\w+$/gi;
-  const stringRegexRus = /^[а-я]+$/gi;
-  return stringRegex.test(string) || stringRegexRus.test(string);
+  const stringRegex = /^[\w]+\s?[\w]+$/;
+  const stringRegexRus = /^[а-яё\d]+\s?[а-яё\d\s?]+$/gi;
+  // const spaceRegex = /\s/;
+  return (stringRegex.test(string) || stringRegexRus.test(string)) /* && spaceRegex.test(string) */;
+  /* \s */
 };
 
 const validateString = ({ string, minLength, maxLength }) => {
@@ -30,7 +32,7 @@ const validateString = ({ string, minLength, maxLength }) => {
   } else if (!isValidMinLength) {
     result.error = 'Длина должна быть больше 1 символа';
   } else if (!isValidCorrect) {
-    result.error = 'Символы должны быть латинскими или кириллическими';
+    result.error = 'Символы должны быть латинскими или кириллическими включая числа';
   } else if (!isValidMaxLength) {
     result.error = 'Длина не должна привышать 30 символов';
   }

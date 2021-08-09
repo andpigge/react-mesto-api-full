@@ -19,8 +19,13 @@ function AddPlacePopup({ onAddPlace, loading }) {
   const [placeName, setPlaceName] = useState('');
   const [placeImg, setPlaceImg] = useState('');
 
+  // Валидация
   const [isValid, setIsValid] = useState(false);
-  const [messageInput, setMessageInput] = useState(false);
+  const [messageInput, setMessageInput] = useState({
+    isValidated: false,
+    message: null,
+    error: null
+  });
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -99,7 +104,8 @@ function AddPlacePopup({ onAddPlace, loading }) {
         </label>
         <button
           className="button-popup button-popup_add_card"
-          type="submit" disabled={ !isValid }
+          type="submit"
+          disabled={ !isValid }
           style={ isValid ? buttonStylesValidateTrue : buttonStylesValidateFalse }
         >
           { loading ? 'Создать...' : 'Создать' }
