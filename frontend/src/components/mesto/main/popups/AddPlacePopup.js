@@ -48,7 +48,7 @@ function AddPlacePopup({ onAddPlace, loading }) {
   const checkInputName = (e) => {
     const name = e.target.value;
 
-    const objectInput = validateString(name, 2);
+    const objectInput = validateString({ string: name, minLength: 1, maxLength: 30 });
 
     setIsValid(objectInput.isValidated);
     setMessageInput(objectInput);
@@ -58,11 +58,11 @@ function AddPlacePopup({ onAddPlace, loading }) {
 
   return (
     <PopupWithForm
-      title={'Новое место'}
-      name={'popup_add_card'}
-      isOpen={isOpen}
-      onClose={resetFormFieldsOnClose}
-      onSubmit={handleSubmit}
+      title={ 'Новое место' }
+      name={ 'popup_add_card' }
+      isOpen={ isOpen }
+      onClose={ resetFormFieldsOnClose }
+      onSubmit={ handleSubmit }
     >
       <>
         <label className="popup__form-label">
@@ -76,11 +76,11 @@ function AddPlacePopup({ onAddPlace, loading }) {
             name="placeName"
             minLength="2"
             maxLength="30"
-            required value={placeName}
-            onChange={checkInputName}
+            required value={ placeName }
+            onChange={ checkInputName }
             style={ isValid ? inputStylesValidateTrue : inputStylesValidateFalse }
           />
-          <span style={isValid ? spanStylesValidateTrue : spanStylesValidateFalse }>
+          <span style={ isValid ? spanStylesValidateTrue : spanStylesValidateFalse }>
             {
               isValid ? messageInput.message : messageInput.error
             }
@@ -99,10 +99,10 @@ function AddPlacePopup({ onAddPlace, loading }) {
         </label>
         <button
           className="button-popup button-popup_add_card"
-          type="submit" disabled={!isValid}
+          type="submit" disabled={ !isValid }
           style={ isValid ? buttonStylesValidateTrue : buttonStylesValidateFalse }
         >
-          {loading ? 'Создать...' : 'Создать'}
+          { loading ? 'Создать...' : 'Создать' }
         </button>
       </>
     </PopupWithForm>
