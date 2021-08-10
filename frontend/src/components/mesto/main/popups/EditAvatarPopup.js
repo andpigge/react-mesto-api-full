@@ -1,9 +1,10 @@
-import React, { useRef, useContext, useState } from 'react';
+import React, { useRef, useContext } from 'react';
 
 import PopupWithForm from './PopupWithForm';
 
 // Контекст
 import { LogicsAllPopups } from '../../../../contexts/logicsAllPopups';
+import { ValidateInput } from '../../../../contexts/validateInput';
 
 // Валидация
 import validateUrl from '../../../../utils/validate/validateUrl';
@@ -17,13 +18,6 @@ import {
 } from '../../../../utils/validate/styles';
 
 function EditAvatarPopup({ onUpdateAvatar, loading }) {
-  // Валидация url
-  const [isValidUrl, setIsValidUrl] = useState(false);
-  const [messageInputUrl, setMessageInputUrl] = useState({
-    isValidated: false,
-    message: null,
-    error: null
-  });
 
   // Использую рефы
   const inputRef = useRef();
@@ -33,6 +27,11 @@ function EditAvatarPopup({ onUpdateAvatar, loading }) {
     isEditProfilePopupOpen: isOpen,
     closeAllPopups: onClose
   } = useContext(LogicsAllPopups);
+
+  const {
+    isValidUrl, setIsValidUrl,
+    messageInputUrl, setMessageInputUrl
+  } = useContext(ValidateInput);
 
   const handleSubmit = e => {
     e.preventDefault();

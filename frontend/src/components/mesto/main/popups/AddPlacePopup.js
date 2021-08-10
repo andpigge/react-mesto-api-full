@@ -3,6 +3,7 @@ import PopupWithForm from './PopupWithForm';
 
 // Контекст
 import { LogicsAllPopups } from '../../../../contexts/logicsAllPopups';
+import { ValidateInput } from '../../../../contexts/validateInput';
 
 // Валидация
 import validateString from '../../../../utils/validate/validateString';
@@ -20,21 +21,18 @@ function AddPlacePopup({ onAddPlace, loading }) {
   const [placeName, setPlaceName] = useState('');
   const [placeImg, setPlaceImg] = useState('');
 
-  // Валидация имени
-  const [isValidName, setIsValidName] = useState(false);
-  const [messageInputName, setMessageInputName] = useState({
-    isValidated: false,
-    message: null,
-    error: null
-  });
+  // Контекст
+  const {
+    isAddPlacePopupOpen: isOpen,
+    closeAllPopups: onClose
+  } = useContext(LogicsAllPopups);
 
-  // Валидация url
-  const [isValidUrl, setIsValidUrl] = useState(false);
-  const [messageInputUrl, setMessageInputUrl] = useState({
-    isValidated: false,
-    message: null,
-    error: null
-  });
+  const {
+    isValidName, setIsValidName,
+    messageInputName, setMessageInputName,
+    isValidUrl, setIsValidUrl,
+    messageInputUrl, setMessageInputUrl
+  } = useContext(ValidateInput);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -47,11 +45,6 @@ function AddPlacePopup({ onAddPlace, loading }) {
     setPlaceName('');
     setPlaceImg('');
   };
-
-  const {
-    isAddPlacePopupOpen: isOpen,
-    closeAllPopups: onClose
-  } = useContext(LogicsAllPopups);
 
   const resetFormFieldsOnClose = () => {
     onClose();
@@ -134,8 +127,8 @@ function AddPlacePopup({ onAddPlace, loading }) {
         <button
           className="button-popup button-popup_add_card"
           type="submit"
-          disabled={ !isValidName && !isValidUrl }
           style={ isValidName && isValidUrl ? buttonStylesValidateTrue : buttonStylesValidateFalse }
+          disabled={ isValidName && isValidUrl ? false : true }
         >
           { loading ? 'Создать...' : 'Создать' }
         </button>

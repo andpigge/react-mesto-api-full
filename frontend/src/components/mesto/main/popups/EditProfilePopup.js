@@ -4,6 +4,7 @@ import PopupWithForm from './PopupWithForm';
 // Контекст
 import { CurrentUserContext } from '../../../../contexts/CurrentUserContext';
 import { LogicsAllPopups } from '../../../../contexts/logicsAllPopups';
+import { ValidateInput } from '../../../../contexts/validateInput';
 
 // Валидация
 import validateString from '../../../../utils/validate/validateString';
@@ -23,30 +24,25 @@ function EditProfilePopup({ onUpdateUser, loading }) {
   });
   const {profileName, profileDoes} = profileValue;
 
-  // Валидация имени
-  const [isValidName, setIsValidName] = useState(true);
-  const [messageInputName, setMessageInputName] = useState({
-    isValidated: false,
-    message: null,
-    error: null
-  });
-
-  // Валидация описания
-  const [isValidDesc, setIsValidDesc] = useState(true);
-  const [messageInputDesc, setMessageInputDesc] = useState({
-    isValidated: false,
-    message: null,
-    error: null
-  });
-
   // Контекст
   const { about, name } = useContext(CurrentUserContext);
-    // validation = useContext(ValidationFormContext););
 
   const {
     isEditAvatarPopupOpen: isOpen,
     closeAllPopups: onClose
   } = useContext(LogicsAllPopups);
+
+  const {
+    isValidName, setIsValidName,
+    messageInputName, setMessageInputName,
+    isValidDesc, setIsValidDesc,
+    messageInputDesc, setMessageInputDesc
+  } = useContext(ValidateInput);
+
+  // Ставлю изначально state на true
+  useEffect(() => {
+    setIsValidName(true);
+  }, [setIsValidName]);
 
   // Вторым параметром передал переменные зависимости, те что используются в useEffect
   useEffect(() => {
@@ -162,7 +158,7 @@ function EditProfilePopup({ onUpdateUser, loading }) {
           className="button-popup button-popup_edit_profile"
           type="submit"
           style={ isValidName && isValidDesc ? buttonStylesValidateTrue : buttonStylesValidateFalse }
-          disabled={ !isValidName && !isValidDesc }
+          disabled={ isValidName && isValidDesc ? false : true }
         >
           {loading ? 'Сохранить...' : 'Сохранить'}
         </button>

@@ -17,8 +17,7 @@ import { checkTokenApi } from '../utils/auth';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { CardListContext } from '../contexts/cardListContext';
 import { LogicsAllPopups } from '../contexts/logicsAllPopups';
-
-// import { appUrl } from '../utils/constants';
+import { ValidateInput } from '../contexts/validateInput';
 
 // HOC
 import ProtectedRoute from './ProtectedRoute';
@@ -49,6 +48,30 @@ function App() {
   // Статус пользователя
   const [loggedIn, setLoggedIn] = React.useState(false);
 
+  // Валидация имени
+  const [isValidName, setIsValidName] = useState(false);
+  const [messageInputName, setMessageInputName] = useState({
+    isValidated: false,
+    message: null,
+    error: null
+  });
+
+  // Валидация url
+  const [isValidUrl, setIsValidUrl] = useState(false);
+  const [messageInputUrl, setMessageInputUrl] = useState({
+    isValidated: false,
+    message: null,
+    error: null
+  });
+
+  // Валидация описания
+  const [isValidDesc, setIsValidDesc] = useState(true);
+  const [messageInputDesc, setMessageInputDesc] = useState({
+    isValidated: false,
+    message: null,
+    error: null
+  });
+
   useEffect(() => {
     if (loggedIn) {
       // Данные должны подгружаться одновремено
@@ -66,13 +89,22 @@ function App() {
   }, [loggedIn]);
 
   function closeAllPopups() {
-    setEditAvatarPopupOpen(false);
-    setEditProfilePopupOpen(false);
-    setAddPlacePopupOpen(false);
     setShowPopupImg(false);
     setConfirmPoppup(false);
     setConfirmAuthPoppup(false);
+    setEditProfilePopupOpen(false);
+    setEditAvatarPopupOpen(false);
+    setAddPlacePopupOpen(false);
   }
+
+  // function closeAllPopupsValidate(setIsValidOne, setIsValidTwo = false) {
+  //   setIsValidOne(false);
+  //   if (setIsValidTwo) {
+  //     setIsValidTwo(false);
+  //   }
+  //   setEditAvatarPopupOpen(false);
+  //   setAddPlacePopupOpen(false);
+  // }
 
   const history = useHistory();
 
@@ -150,6 +182,15 @@ function App() {
     isConfirmAuthPoppup
   };
 
+  const validateInputState = {
+    isValidName, setIsValidName,
+    messageInputName, setMessageInputName,
+    isValidUrl, setIsValidUrl,
+    messageInputUrl, setMessageInputUrl,
+    isValidDesc, setIsValidDesc,
+    messageInputDesc, setMessageInputDesc
+  };
+
   const handleLogin = () => {
     setLoggedIn(true);
   };
@@ -169,9 +210,16 @@ function App() {
 
             {/* Убрал appUrl `${appUrl}/signin` */}
             {/* HOC. Создаем лишний компонент */}
-            <ProtectedRoute path={`/mesto`} loggedIn={loggedIn} signOut={signOut}
-            setStateUser={setCurrentUser} setStateCards={setCardList} component={Mesto}
-            />
+            <ValidateInput.Provider value={ validateInputState } >
+              <ProtectedRoute
+                path={`/mesto`}
+                loggedIn={loggedIn}
+                signOut={signOut}
+                setStateUser={setCurrentUser}
+                setStateCards={setCardList}
+                component={Mesto}
+              />
+            </ValidateInput.Provider>
 
             {/* Убрал appUrl `${appUrl}/signin` */}
             <Route path={`/signup`}>

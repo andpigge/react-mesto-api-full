@@ -20,6 +20,7 @@ function Mesto({ setStateUser, setStateCards, loggedIn, signOut }) {
 
   const [isLoadingData, setIsLoadingData] = useState(false);
 
+  // Контекст
   const user = useContext(CurrentUserContext);
   const cardList = useContext(CardListContext);
   const { closeAllPopups, cardRemove } = useContext(LogicsAllPopups);
