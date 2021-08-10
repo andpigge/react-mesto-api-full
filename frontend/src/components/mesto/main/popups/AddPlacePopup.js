@@ -6,6 +6,7 @@ import { LogicsAllPopups } from '../../../../contexts/logicsAllPopups';
 
 // Валидация
 import validateString from '../../../../utils/validate/validateString';
+import validateUrl from '../../../../utils/validate/validateUrl';
 import {
   spanStylesValidateTrue,
   spanStylesValidateFalse,
@@ -19,9 +20,17 @@ function AddPlacePopup({ onAddPlace, loading }) {
   const [placeName, setPlaceName] = useState('');
   const [placeImg, setPlaceImg] = useState('');
 
-  // Валидация
-  const [isValid, setIsValid] = useState(false);
-  const [messageInput, setMessageInput] = useState({
+  // Валидация имени
+  const [isValidName, setIsValidName] = useState(false);
+  const [messageInputName, setMessageInputName] = useState({
+    isValidated: false,
+    message: null,
+    error: null
+  });
+
+  // Валидация url
+  const [isValidUrl, setIsValidUrl] = useState(false);
+  const [messageInputUrl, setMessageInputUrl] = useState({
     isValidated: false,
     message: null,
     error: null
@@ -55,10 +64,21 @@ function AddPlacePopup({ onAddPlace, loading }) {
 
     const objectInput = validateString({ string: name, minLength: 1, maxLength: 30 });
 
-    setIsValid(objectInput.isValidated);
-    setMessageInput(objectInput);
+    setIsValidName(objectInput.isValidated);
+    setMessageInputName(objectInput);
 
     return setPlaceName(name);
+  };
+
+  const checkInputUrl = (e) => {
+    const url = e.target.value;
+
+    const objectInput = validateUrl({ url });
+
+    setIsValidUrl(objectInput.isValidated);
+    setMessageInputUrl(objectInput);
+
+    return setPlaceImg(url);
   };
 
   return (
@@ -71,7 +91,7 @@ function AddPlacePopup({ onAddPlace, loading }) {
     >
       <>
         <label className="popup__form-label">
-          <span style={ isValid ? spanStylesValidateTrue : spanStylesValidateFalse } >
+          <span style={ isValidName ? spanStylesValidateTrue : spanStylesValidateFalse } >
             *
           </span>
           <input
@@ -83,15 +103,18 @@ function AddPlacePopup({ onAddPlace, loading }) {
             maxLength="30"
             required value={ placeName }
             onChange={ checkInputName }
-            style={ isValid ? inputStylesValidateTrue : inputStylesValidateFalse }
+            style={ isValidName ? inputStylesValidateTrue : inputStylesValidateFalse }
           />
-          <span style={ isValid ? spanStylesValidateTrue : spanStylesValidateFalse }>
+          <span style={ isValidName ? spanStylesValidateTrue : spanStylesValidateFalse }>
             {
-              isValid ? messageInput.message : messageInput.error
+              isValidName ? messageInputName.message : messageInputName.error
             }
           </span>
         </label>
         <label className="popup__form-label">
+          <span style={ isValidUrl ? spanStylesValidateTrue : spanStylesValidateFalse } >
+            *
+          </span>
           <input
             type="url"
             className="popup__form-input popup__form-input_value_img"
@@ -99,14 +122,20 @@ function AddPlacePopup({ onAddPlace, loading }) {
             id="place-img-input"
             name="placeImg"
             required value={placeImg}
-            onChange={e => setPlaceImg(e.target.value)}
+            onChange={ checkInputUrl }
+            style={ isValidUrl ? inputStylesValidateTrue : inputStylesValidateFalse }
           />
+          <span style={ isValidUrl ? spanStylesValidateTrue : spanStylesValidateFalse }>
+            {
+              isValidUrl ? messageInputUrl.message : messageInputUrl.error
+            }
+          </span>
         </label>
         <button
           className="button-popup button-popup_add_card"
           type="submit"
-          disabled={ !isValid }
-          style={ isValid ? buttonStylesValidateTrue : buttonStylesValidateFalse }
+          disabled={ !isValidName && !isValidUrl }
+          style={ isValidName && isValidUrl ? buttonStylesValidateTrue : buttonStylesValidateFalse }
         >
           { loading ? 'Создать...' : 'Создать' }
         </button>

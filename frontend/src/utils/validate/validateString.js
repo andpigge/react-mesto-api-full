@@ -11,9 +11,7 @@ const checkMaxLengthInput = (string, maxLength) => {
 const checkInputСorrect = (string) => {
   const stringRegex = /^[\w]+\s?[\w]+$/;
   const stringRegexRus = /^[а-яё\d]+\s?[а-яё\d\s?]+$/gi;
-  // const spaceRegex = /\s/;
-  return (stringRegex.test(string) || stringRegexRus.test(string)) /* && spaceRegex.test(string) */;
-  /* \s */
+  return (stringRegex.test(string) || stringRegexRus.test(string));
 };
 
 const validateString = ({ string, minLength, maxLength }) => {

@@ -25,7 +25,11 @@ function EditProfilePopup({ onUpdateUser, loading }) {
 
   // Валидация имени
   const [isValidName, setIsValidName] = useState(true);
-  const [messageInputName, setMessageInputName] = useState({});
+  const [messageInputName, setMessageInputName] = useState({
+    isValidated: false,
+    message: null,
+    error: null
+  });
 
   // Валидация описания
   const [isValidDesc, setIsValidDesc] = useState(true);
