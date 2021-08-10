@@ -1,4 +1,4 @@
-import React, { useRef, useContext } from 'react';
+import React, { useRef, useContext, useEffect } from 'react';
 
 import PopupWithForm from './PopupWithForm';
 
@@ -25,13 +25,31 @@ function EditAvatarPopup({ onUpdateAvatar, loading }) {
   // Контекст
   const {
     isEditProfilePopupOpen: isOpen,
-    closeAllPopups: onClose
+    closePopupAvatar: onClose,
+    isEditProfilePopupOpen
   } = useContext(LogicsAllPopups);
 
   const {
     isValidUrl, setIsValidUrl,
-    messageInputUrl, setMessageInputUrl
+    messageInputUrl, setMessageInputUrl,
   } = useContext(ValidateInput);
+
+  // Закрытие попапов по нажатии на esc
+  useEffect(() => {
+    const closePopupTouchEsc = e => {
+      if (e.key === 'Escape') {
+        onClose();
+        inputRef.current.value = '';
+      }
+    };
+
+    if (isEditProfilePopupOpen) {
+      document.addEventListener('keydown', closePopupTouchEsc);
+    }
+    return () => {
+      document.removeEventListener('keydown', closePopupTouchEsc);
+    };
+  }, [isEditProfilePopupOpen, onClose]);
 
   const handleSubmit = e => {
     e.preventDefault();

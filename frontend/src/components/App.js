@@ -48,9 +48,17 @@ function App() {
   // Статус пользователя
   const [loggedIn, setLoggedIn] = React.useState(false);
 
-  // Валидация имени
-  const [isValidName, setIsValidName] = useState(false);
-  const [messageInputName, setMessageInputName] = useState({
+  // Валидация имени для профиля
+  const [isValidNameProfile, setIsValidNameProfile] = useState(true);
+  const [messageInputNameProfile, setMessageInputNameProfile] = useState({
+    isValidated: false,
+    message: null,
+    error: null
+  });
+
+  // Валидация имени для места
+  const [isValidNamePlace, setIsValidNamePlace] = useState(false);
+  const [messageInputNamePlace, setMessageInputNamePlace] = useState({
     isValidated: false,
     message: null,
     error: null
@@ -92,19 +100,34 @@ function App() {
     setShowPopupImg(false);
     setConfirmPoppup(false);
     setConfirmAuthPoppup(false);
-    setEditProfilePopupOpen(false);
     setEditAvatarPopupOpen(false);
+  }
+
+  function closePopupPlace() {
+    setIsValidNamePlace(false);
+    setMessageInputNamePlace({
+      isValidated: false,
+      message: null,
+      error: null
+    });
+    setIsValidUrl(false);
+    setMessageInputUrl({
+      isValidated: false,
+      message: null,
+      error: null
+    });
     setAddPlacePopupOpen(false);
   }
 
-  // function closeAllPopupsValidate(setIsValidOne, setIsValidTwo = false) {
-  //   setIsValidOne(false);
-  //   if (setIsValidTwo) {
-  //     setIsValidTwo(false);
-  //   }
-  //   setEditAvatarPopupOpen(false);
-  //   setAddPlacePopupOpen(false);
-  // }
+  function closePopupAvatar() {
+    setIsValidUrl(false);
+    setMessageInputUrl({
+      isValidated: false,
+      message: null,
+      error: null
+    });
+    setEditProfilePopupOpen(false);
+  }
 
   const history = useHistory();
 
@@ -116,7 +139,6 @@ function App() {
         .then(res => {
           localStorage.setItem('email', res.data.email);
           setLoggedIn(true);
-          // Убрал appUrl `${appUrl}/signin`
           history.push(`/mesto`);
         });
     }
@@ -130,13 +152,13 @@ function App() {
       }
     };
 
-    if (isEditProfilePopupOpen || isAddPlacePopupOpen || isEditAvatarPopupOpen || isShowPopupImg || isConfirmPoppup || isConfirmAuthPoppup) {
+    if (isAddPlacePopupOpen || isEditAvatarPopupOpen || isShowPopupImg || isConfirmPoppup || isConfirmAuthPoppup) {
       document.addEventListener('keydown', closePopupTouchEsc);
     }
     return () => {
       document.removeEventListener('keydown', closePopupTouchEsc);
     };
-  }, [isEditProfilePopupOpen, isAddPlacePopupOpen, isEditAvatarPopupOpen, isShowPopupImg, isConfirmPoppup, isConfirmAuthPoppup]);
+  }, [isAddPlacePopupOpen, isEditAvatarPopupOpen, isShowPopupImg, isConfirmPoppup, isConfirmAuthPoppup]);
 
   function handleCardClick(name, link) {
     setselectedCard({name, link});
@@ -166,6 +188,8 @@ function App() {
 
   const popups = {
     closeAllPopups,
+    closePopupPlace,
+    closePopupAvatar,
     handleEditAvatarClick,
     handleEditProfileClick,
     handleAddPlaceClick,
@@ -183,12 +207,14 @@ function App() {
   };
 
   const validateInputState = {
-    isValidName, setIsValidName,
-    messageInputName, setMessageInputName,
+    isValidNameProfile, setIsValidNameProfile,
+    messageInputNameProfile, setMessageInputNameProfile,
+    isValidNamePlace, setIsValidNamePlace,
+    messageInputNamePlace, setMessageInputNamePlace,
     isValidUrl, setIsValidUrl,
     messageInputUrl, setMessageInputUrl,
     isValidDesc, setIsValidDesc,
-    messageInputDesc, setMessageInputDesc
+    messageInputDesc, setMessageInputDesc,
   };
 
   const handleLogin = () => {
@@ -197,7 +223,6 @@ function App() {
 
   const signOut = () => {
     localStorage.removeItem('jwt');
-    // Убрал appUrl `${appUrl}/signin`
     history.push(`/signin`);
     setLoggedIn(false);
   }
@@ -208,7 +233,6 @@ function App() {
         <LogicsAllPopups.Provider value={ popups } >
           <Switch>
 
-            {/* Убрал appUrl `${appUrl}/signin` */}
             {/* HOC. Создаем лишний компонент */}
             <ValidateInput.Provider value={ validateInputState } >
               <ProtectedRoute
@@ -221,16 +245,13 @@ function App() {
               />
             </ValidateInput.Provider>
 
-            {/* Убрал appUrl `${appUrl}/signin` */}
             <Route path={`/signup`}>
               <Register />
             </Route>
-            {/* Убрал appUrl `${appUrl}/signin` */}
             <Route path={`/signin`}>
               <Login handleLogin={handleLogin} />
             </Route>
 
-            {/* Убрал appUrl `${appUrl}/signin` */}
             <Route path='*'>
               { loggedIn ? (
                 <Redirect to={`/mesto`} />

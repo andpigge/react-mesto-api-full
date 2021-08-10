@@ -33,16 +33,11 @@ function EditProfilePopup({ onUpdateUser, loading }) {
   } = useContext(LogicsAllPopups);
 
   const {
-    isValidName, setIsValidName,
-    messageInputName, setMessageInputName,
+    isValidNameProfile, setIsValidNameProfile,
+    messageInputNameProfile, setMessageInputNameProfile,
     isValidDesc, setIsValidDesc,
     messageInputDesc, setMessageInputDesc
   } = useContext(ValidateInput);
-
-  // Ставлю изначально state на true
-  useEffect(() => {
-    setIsValidName(true);
-  }, [setIsValidName]);
 
   // Вторым параметром передал переменные зависимости, те что используются в useEffect
   useEffect(() => {
@@ -81,8 +76,8 @@ function EditProfilePopup({ onUpdateUser, loading }) {
 
     const objectInput = validateString({ string: name, minLength: 1, maxLength: 40 });
 
-    setIsValidName(objectInput.isValidated);
-    setMessageInputName(objectInput);
+    setIsValidNameProfile(objectInput.isValidated);
+    setMessageInputNameProfile(objectInput);
 
     return handleChange(e);
   };
@@ -108,7 +103,7 @@ function EditProfilePopup({ onUpdateUser, loading }) {
     >
       <>
         <label className="popup__form-label">
-          <span style={ isValidName ? spanStylesValidateTrue : spanStylesValidateFalse } >
+          <span style={ isValidNameProfile ? spanStylesValidateTrue : spanStylesValidateFalse } >
             *
           </span>
           {/* С помощью value и onChange создал управляющий компонент, где содержимое берется из state компонента */}
@@ -123,11 +118,11 @@ function EditProfilePopup({ onUpdateUser, loading }) {
             required
             value={profileName}
             onChange={ checkInputName }
-            style={ isValidName ? inputStylesValidateTrue : inputStylesValidateFalse }
+            style={ isValidNameProfile ? inputStylesValidateTrue : inputStylesValidateFalse }
           />
-          <span style={ isValidName ? spanStylesValidateTrue : spanStylesValidateFalse }>
+          <span style={ isValidNameProfile ? spanStylesValidateTrue : spanStylesValidateFalse }>
             {
-              isValidName ? messageInputName.message : messageInputName.error
+              isValidNameProfile ? messageInputNameProfile.message : messageInputNameProfile.error
             }
           </span>
         </label>
@@ -157,8 +152,8 @@ function EditProfilePopup({ onUpdateUser, loading }) {
         <button
           className="button-popup button-popup_edit_profile"
           type="submit"
-          style={ isValidName && isValidDesc ? buttonStylesValidateTrue : buttonStylesValidateFalse }
-          disabled={ isValidName && isValidDesc ? false : true }
+          style={ isValidNameProfile && isValidDesc ? buttonStylesValidateTrue : buttonStylesValidateFalse }
+          disabled={ isValidNameProfile && isValidDesc ? false : true }
         >
           {loading ? 'Сохранить...' : 'Сохранить'}
         </button>

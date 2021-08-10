@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import PopupWithForm from './PopupWithForm';
 
 // Контекст
@@ -24,15 +24,34 @@ function AddPlacePopup({ onAddPlace, loading }) {
   // Контекст
   const {
     isAddPlacePopupOpen: isOpen,
-    closeAllPopups: onClose
+    closePopupPlace: onClose,
+    isAddPlacePopupOpen
   } = useContext(LogicsAllPopups);
 
   const {
-    isValidName, setIsValidName,
-    messageInputName, setMessageInputName,
+    isValidNamePlace, setIsValidNamePlace,
+    messageInputNamePlace, setMessageInputNamePlace,
     isValidUrl, setIsValidUrl,
-    messageInputUrl, setMessageInputUrl
+    messageInputUrl, setMessageInputUrl,
   } = useContext(ValidateInput);
+
+  // Закрытие попапов по нажатии на esc
+  useEffect(() => {
+    const closePopupTouchEsc = e => {
+      if (e.key === 'Escape') {
+        onClose();
+        setPlaceName('');
+        setPlaceImg('');
+      }
+    };
+
+    if (isAddPlacePopupOpen) {
+      document.addEventListener('keydown', closePopupTouchEsc);
+    }
+    return () => {
+      document.removeEventListener('keydown', closePopupTouchEsc);
+    };
+  }, [isAddPlacePopupOpen, onClose]);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -57,8 +76,8 @@ function AddPlacePopup({ onAddPlace, loading }) {
 
     const objectInput = validateString({ string: name, minLength: 1, maxLength: 30 });
 
-    setIsValidName(objectInput.isValidated);
-    setMessageInputName(objectInput);
+    setIsValidNamePlace(objectInput.isValidated);
+    setMessageInputNamePlace(objectInput);
 
     return setPlaceName(name);
   };
@@ -84,7 +103,7 @@ function AddPlacePopup({ onAddPlace, loading }) {
     >
       <>
         <label className="popup__form-label">
-          <span style={ isValidName ? spanStylesValidateTrue : spanStylesValidateFalse } >
+          <span style={ isValidNamePlace ? spanStylesValidateTrue : spanStylesValidateFalse } >
             *
           </span>
           <input
@@ -96,11 +115,11 @@ function AddPlacePopup({ onAddPlace, loading }) {
             maxLength="30"
             required value={ placeName }
             onChange={ checkInputName }
-            style={ isValidName ? inputStylesValidateTrue : inputStylesValidateFalse }
+            style={ isValidNamePlace ? inputStylesValidateTrue : inputStylesValidateFalse }
           />
-          <span style={ isValidName ? spanStylesValidateTrue : spanStylesValidateFalse }>
+          <span style={ isValidNamePlace ? spanStylesValidateTrue : spanStylesValidateFalse }>
             {
-              isValidName ? messageInputName.message : messageInputName.error
+              isValidNamePlace ? messageInputNamePlace.message : messageInputNamePlace.error
             }
           </span>
         </label>
@@ -127,8 +146,8 @@ function AddPlacePopup({ onAddPlace, loading }) {
         <button
           className="button-popup button-popup_add_card"
           type="submit"
-          style={ isValidName && isValidUrl ? buttonStylesValidateTrue : buttonStylesValidateFalse }
-          disabled={ isValidName && isValidUrl ? false : true }
+          style={ isValidNamePlace && isValidUrl ? buttonStylesValidateTrue : buttonStylesValidateFalse }
+          disabled={ isValidNamePlace && isValidUrl ? false : true }
         >
           { loading ? 'Создать...' : 'Создать' }
         </button>

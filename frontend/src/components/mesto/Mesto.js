@@ -17,13 +17,12 @@ import { CardListContext } from '../../contexts/cardListContext';
 import { LogicsAllPopups } from '../../contexts/logicsAllPopups';
 
 function Mesto({ setStateUser, setStateCards, loggedIn, signOut }) {
-
   const [isLoadingData, setIsLoadingData] = useState(false);
 
   // Контекст
   const user = useContext(CurrentUserContext);
   const cardList = useContext(CardListContext);
-  const { closeAllPopups, cardRemove } = useContext(LogicsAllPopups);
+  const { closeAllPopups, closePopupPlace, closePopupAvatar, cardRemove } = useContext(LogicsAllPopups);
 
   const handleUpdateUser = ({ profileName, profileDoes }) => {
     setIsLoadingData(true);
@@ -42,7 +41,7 @@ function Mesto({ setStateUser, setStateCards, loggedIn, signOut }) {
     Api.patchUpdateUserAvatar(avatar)
       .then(newUser => {
         setStateUser(newUser.data);
-        closeAllPopups();
+        closePopupAvatar();
       })
       .finally(() => {
         setIsLoadingData(false);
@@ -54,7 +53,7 @@ function Mesto({ setStateUser, setStateCards, loggedIn, signOut }) {
     Api.postAddCard(name, link)
       .then(newCard => {
         setStateCards([newCard.data, ...cardList]);
-        closeAllPopups();
+        closePopupPlace();
       })
       .finally(() => {
         setIsLoadingData(false);
