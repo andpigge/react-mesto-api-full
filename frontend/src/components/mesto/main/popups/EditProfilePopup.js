@@ -29,7 +29,7 @@ function EditProfilePopup({ onUpdateUser, loading }) {
 
   const {
     isEditAvatarPopupOpen: isOpen,
-    closeAllPopups: onClose
+    closePopupProfile: onClose,
   } = useContext(LogicsAllPopups);
 
   const {
@@ -39,13 +39,33 @@ function EditProfilePopup({ onUpdateUser, loading }) {
     messageInputDesc, setMessageInputDesc
   } = useContext(ValidateInput);
 
-  // Вторым параметром передал переменные зависимости, те что используются в useEffect
+  // Меняет value поля, на значения в профиле
   useEffect(() => {
     setProfileValue({
       profileName: name,
       profileDoes: about
     });
   }, [name, about]);
+
+  // Закрытие попапов по нажатии на esc
+  useEffect(() => {
+    const closePopupTouchEsc = e => {
+      if (e.key === 'Escape') {
+        onClose();
+        setProfileValue({
+          profileName: name,
+          profileDoes: about
+        });
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', closePopupTouchEsc);
+    }
+    return () => {
+      document.removeEventListener('keydown', closePopupTouchEsc);
+    };
+  }, [isOpen, onClose, name, about]);
 
   // Немного усложнил задачу, чтобы потренироваться, понять как реализуется задача по-другому
   const handleChange = e => {

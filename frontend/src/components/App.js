@@ -96,11 +96,11 @@ function App() {
     }
   }, [loggedIn]);
 
+  // Закрытие попапов
   function closeAllPopups() {
     setShowPopupImg(false);
     setConfirmPoppup(false);
     setConfirmAuthPoppup(false);
-    setEditAvatarPopupOpen(false);
   }
 
   function closePopupPlace() {
@@ -129,6 +129,22 @@ function App() {
     setEditProfilePopupOpen(false);
   }
 
+  function closePopupProfile() {
+    setIsValidNameProfile(true);
+    setMessageInputNameProfile({
+      isValidated: false,
+      message: null,
+      error: null
+    });
+    setIsValidDesc(true);
+    setMessageInputDesc({
+      isValidated: false,
+      message: null,
+      error: null
+    });
+    setEditAvatarPopupOpen(false);
+  }
+
   const history = useHistory();
 
   // Заход на сайт
@@ -152,13 +168,13 @@ function App() {
       }
     };
 
-    if (isAddPlacePopupOpen || isEditAvatarPopupOpen || isShowPopupImg || isConfirmPoppup || isConfirmAuthPoppup) {
+    if (isShowPopupImg || isConfirmPoppup || isConfirmAuthPoppup) {
       document.addEventListener('keydown', closePopupTouchEsc);
     }
     return () => {
       document.removeEventListener('keydown', closePopupTouchEsc);
     };
-  }, [isAddPlacePopupOpen, isEditAvatarPopupOpen, isShowPopupImg, isConfirmPoppup, isConfirmAuthPoppup]);
+  }, [isShowPopupImg, isConfirmPoppup, isConfirmAuthPoppup]);
 
   function handleCardClick(name, link) {
     setselectedCard({name, link});
@@ -190,6 +206,7 @@ function App() {
     closeAllPopups,
     closePopupPlace,
     closePopupAvatar,
+    closePopupProfile,
     handleEditAvatarClick,
     handleEditProfileClick,
     handleAddPlaceClick,
@@ -231,10 +248,10 @@ function App() {
     <CurrentUserContext.Provider value={ currentUser } >
       <CardListContext.Provider value={ cardList }>
         <LogicsAllPopups.Provider value={ popups } >
-          <Switch>
+          <ValidateInput.Provider value={ validateInputState } >
+            <Switch>
 
-            {/* HOC. Создаем лишний компонент */}
-            <ValidateInput.Provider value={ validateInputState } >
+              {/* HOC. Создаем лишний компонент */}
               <ProtectedRoute
                 path={`/mesto`}
                 loggedIn={loggedIn}
@@ -243,28 +260,28 @@ function App() {
                 setStateCards={setCardList}
                 component={Mesto}
               />
-            </ValidateInput.Provider>
 
-            <Route path={`/signup`}>
-              <Register />
-            </Route>
-            <Route path={`/signin`}>
-              <Login handleLogin={handleLogin} />
-            </Route>
+              <Route path={`/signup`}>
+                <Register />
+              </Route>
+              <Route path={`/signin`}>
+                <Login handleLogin={handleLogin} />
+              </Route>
 
-            <Route path='*'>
-              { loggedIn ? (
-                <Redirect to={`/mesto`} />
-                ) : (
-                <Redirect to={`/signin`} />
-              )}
-            </Route>
-            {/* <Route path='*'>
-              <h1 style={mainText}>
-                404
-              </h1>
-            </Route> */}
-          </Switch>
+              <Route path='*'>
+                { loggedIn ? (
+                  <Redirect to={`/mesto`} />
+                  ) : (
+                  <Redirect to={`/signin`} />
+                )}
+              </Route>
+              {/* <Route path='*'>
+                <h1 style={mainText}>
+                  404
+                </h1>
+              </Route> */}
+            </Switch>
+          </ValidateInput.Provider>
         </LogicsAllPopups.Provider>
       </CardListContext.Provider>
     </CurrentUserContext.Provider>

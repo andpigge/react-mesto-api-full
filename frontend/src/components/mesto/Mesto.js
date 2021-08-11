@@ -22,14 +22,14 @@ function Mesto({ setStateUser, setStateCards, loggedIn, signOut }) {
   // Контекст
   const user = useContext(CurrentUserContext);
   const cardList = useContext(CardListContext);
-  const { closeAllPopups, closePopupPlace, closePopupAvatar, cardRemove } = useContext(LogicsAllPopups);
+  const { closeAllPopups, closePopupPlace, closePopupAvatar, closePopupProfile, cardRemove } = useContext(LogicsAllPopups);
 
   const handleUpdateUser = ({ profileName, profileDoes }) => {
     setIsLoadingData(true);
     Api.putUpdateProfile(profileName, profileDoes)
       .then(newUser => {
         setStateUser(newUser.data);
-        closeAllPopups();
+        closePopupProfile();
       })
       .finally(() => {
         setIsLoadingData(false);
