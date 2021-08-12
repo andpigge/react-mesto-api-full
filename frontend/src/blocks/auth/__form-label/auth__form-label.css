@@ -1,0 +1,14 @@
+.auth__form-label {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 29px;
+  box-sizing: border-box;
+  margin-bottom: 30px;
+  padding: 0;
+  padding-bottom: 13px;
+}
+
+.auth__form-label:last-of-type {
+  margin-bottom: 216px;
+}

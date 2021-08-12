@@ -1,6 +1,6 @@
 const checkUrlСorrect = (url) => {
-  const passwordRegex = /^(ftp|http|https):\/\/[^ "]+$/;
-  return passwordRegex.test(url);
+  const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+  return urlRegex.test(url);
 };
 
 const validateUrl = ({ url }) => {

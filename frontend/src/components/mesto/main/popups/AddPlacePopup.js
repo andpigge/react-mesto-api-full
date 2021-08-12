@@ -103,7 +103,10 @@ function AddPlacePopup({ onAddPlace, loading }) {
     >
       <>
         <label className="popup__form-label">
-          <span style={ isValidNamePlace ? spanStylesValidateTrue : spanStylesValidateFalse } >
+          <span
+            className='validationSpan'
+            style={ isValidNamePlace ? spanStylesValidateTrue : spanStylesValidateFalse }
+          >
             *
           </span>
           <input
@@ -124,7 +127,10 @@ function AddPlacePopup({ onAddPlace, loading }) {
           </span>
         </label>
         <label className="popup__form-label">
-          <span style={ isValidUrl ? spanStylesValidateTrue : spanStylesValidateFalse } >
+          <span
+            className='validationSpan'
+            style={ isValidUrl ? spanStylesValidateTrue : spanStylesValidateFalse }
+          >
             *
           </span>
           <input

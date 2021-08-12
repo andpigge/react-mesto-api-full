@@ -14,12 +14,30 @@ const inputStylesValidateFalse = {
   borderColor: '#d43d3d',
 };
 
+const inputStylesValidateAuthTrue = {
+  borderColor: '#ccc',
+};
+
+const inputStylesValidateAuthFalse = {
+  borderColor: '#d43d3d',
+};
+
 const buttonStylesValidateTrue = {
   backgroundColor: 'black',
 };
 
 const buttonStylesValidateFalse = {
   backgroundColor: 'rgba(0, 0, 0, .3)',
+  cursor: 'default',
+};
+
+const buttonStylesValidateAuthTrue = {
+  backgroundColor: 'white',
+};
+
+const buttonStylesValidateAuthFalse = {
+  opacity: '.6',
+  cursor: 'default',
 };
 
 export {
@@ -29,4 +47,8 @@ export {
   inputStylesValidateFalse,
   buttonStylesValidateTrue,
   buttonStylesValidateFalse,
+  buttonStylesValidateAuthTrue,
+  buttonStylesValidateAuthFalse,
+  inputStylesValidateAuthTrue,
+  inputStylesValidateAuthFalse
 };

@@ -85,7 +85,10 @@ function EditAvatarPopup({ onUpdateAvatar, loading }) {
     >
       <>
         <label className="popup__form-label">
-          <span style={ isValidUrl ? spanStylesValidateTrue : spanStylesValidateFalse } >
+          <span
+            className='validationSpan'
+            style={ isValidUrl ? spanStylesValidateTrue : spanStylesValidateFalse }
+          >
             *
           </span>
           <input

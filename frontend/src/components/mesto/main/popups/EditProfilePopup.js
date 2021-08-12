@@ -123,7 +123,10 @@ function EditProfilePopup({ onUpdateUser, loading }) {
     >
       <>
         <label className="popup__form-label">
-          <span style={ isValidNameProfile ? spanStylesValidateTrue : spanStylesValidateFalse } >
+          <span
+            className='validationSpan'
+            style={ isValidNameProfile ? spanStylesValidateTrue : spanStylesValidateFalse }
+          >
             *
           </span>
           {/* С помощью value и onChange создал управляющий компонент, где содержимое берется из state компонента */}
@@ -147,7 +150,10 @@ function EditProfilePopup({ onUpdateUser, loading }) {
           </span>
         </label>
         <label className="popup__form-label">
-          <span style={ isValidDesc ? spanStylesValidateTrue : spanStylesValidateFalse } >
+          <span
+            className='validationSpan'
+            style={ isValidDesc ? spanStylesValidateTrue : spanStylesValidateFalse }
+          >
             *
           </span>
           <input

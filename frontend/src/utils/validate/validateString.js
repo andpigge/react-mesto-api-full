@@ -9,7 +9,7 @@ const checkMaxLengthInput = (string, maxLength) => {
 
 // Проверяет все ли символы латинские или кириллические
 const checkInputСorrect = (string) => {
-  const stringRegex = /^[\w]+\s?[\w]+$/;
+  const stringRegex = /^[\w]+\s?[\w]+$/gi;
   const stringRegexRus = /^[а-яё\d]+\s?[а-яё\d\s?]+$/gi;
   return (stringRegex.test(string) || stringRegexRus.test(string));
 };

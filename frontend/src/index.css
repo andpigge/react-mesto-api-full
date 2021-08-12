@@ -80,6 +80,7 @@
 @import url(./blocks/button-popup/_inactive/button-popup_inactive.css);
 /* auth */
 @import url(./blocks/auth/auth.css);
+@import url(./blocks/auth/__form-label/auth__form-label.css);
 @import url(./blocks/auth/__field-text/auth__field-text.css);
 @import url(./blocks/auth/__form-button/auth__form-button.css);
 @import url(./blocks/auth/__form/auth__form.css);
@@ -87,3 +88,5 @@
 @import url(./blocks/auth/_center/auth_center.css);
 @import url(./blocks/auth/__link/auth__link.css);
 @import url(./blocks/auth/__desc/auth__desc.css);
+/* validationSpan */
+@import url(./blocks/validationSpan/validationSpan.css);

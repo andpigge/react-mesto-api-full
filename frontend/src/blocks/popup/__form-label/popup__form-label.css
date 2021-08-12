@@ -1,5 +1,6 @@
 .popup__form-label {
   margin-bottom: 30px;
+  position: relative;
 }
 
 .popup__form-label:last-of-type {

@@ -80,6 +80,40 @@ function App() {
     error: null
   });
 
+  // Валидация пароля для Входа
+  // Добавляю в app, так как HOC или пользовательские хуки работают только в самом компоненте.
+  // А мне надо менять логику при изменении в поле данных
+  const [ isValidPasswordLogin, setIsValidPasswordLogin ] = useState(false);
+  const [ messageInputPasswordLogin, setMessageInputPasswordLogin ] = useState({
+    isValidated: false,
+    message: null,
+    error: null
+  });
+
+  // Валидация пароля для Регистрации
+  const [ isValidPasswordReg, setIsValidPasswordReg ] = useState(false);
+  const [ messageInputPasswordReg, setMessageInputPasswordReg ] = useState({
+    isValidated: false,
+    message: null,
+    error: null
+  });
+
+  // Валидация email для Входа
+  const [ isValidEmailLogin, setIsValidEmailLogin ] = useState(false);
+  const [ messageInputEmailLogin, setMessageInputEmailLogin ] = useState({
+    isValidated: false,
+    message: null,
+    error: null
+  });
+
+  // Валидация email для Регистрации
+  const [ isValidEmailReg, setIsValidEmailReg ] = useState(false);
+  const [ messageInputEmailReg, setMessageInputEmailReg ] = useState({
+    isValidated: false,
+    message: null,
+    error: null
+  });
+
   useEffect(() => {
     if (loggedIn) {
       // Данные должны подгружаться одновремено
@@ -143,6 +177,37 @@ function App() {
       error: null
     });
     setEditAvatarPopupOpen(false);
+  }
+
+  // Сбрасываю валидацию
+  const resetInputsValidationLogin = () => {
+    setIsValidPasswordLogin(false);
+    setMessageInputPasswordLogin({
+      isValidated: false,
+      message: null,
+      error: null
+    });
+    setIsValidEmailLogin(false);
+    setMessageInputEmailLogin({
+      isValidated: false,
+      message: null,
+      error: null
+    });
+  }
+
+  const resetInputsValidationReg = () => {
+    setIsValidPasswordReg(false);
+    setMessageInputPasswordReg({
+      isValidated: false,
+      message: null,
+      error: null
+    });
+    setIsValidEmailReg(false);
+    setMessageInputEmailReg({
+      isValidated: false,
+      message: null,
+      error: null
+    });
   }
 
   const history = useHistory();
@@ -223,7 +288,7 @@ function App() {
     isConfirmAuthPoppup
   };
 
-  const validateInputState = {
+  const validateInput = {
     isValidNameProfile, setIsValidNameProfile,
     messageInputNameProfile, setMessageInputNameProfile,
     isValidNamePlace, setIsValidNamePlace,
@@ -232,6 +297,16 @@ function App() {
     messageInputUrl, setMessageInputUrl,
     isValidDesc, setIsValidDesc,
     messageInputDesc, setMessageInputDesc,
+    isValidPasswordLogin, setIsValidPasswordLogin,
+    messageInputPasswordLogin, setMessageInputPasswordLogin,
+    isValidEmailLogin, setIsValidEmailLogin,
+    messageInputEmailLogin, setMessageInputEmailLogin,
+    isValidPasswordReg, setIsValidPasswordReg,
+    messageInputPasswordReg, setMessageInputPasswordReg,
+    isValidEmailReg, setIsValidEmailReg,
+    messageInputEmailReg, setMessageInputEmailReg,
+    resetInputsValidationLogin,
+    resetInputsValidationReg
   };
 
   const handleLogin = () => {
@@ -248,7 +323,7 @@ function App() {
     <CurrentUserContext.Provider value={ currentUser } >
       <CardListContext.Provider value={ cardList }>
         <LogicsAllPopups.Provider value={ popups } >
-          <ValidateInput.Provider value={ validateInputState } >
+          <ValidateInput.Provider value={ validateInput } >
             <Switch>
 
               {/* HOC. Создаем лишний компонент */}

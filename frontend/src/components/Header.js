@@ -1,14 +1,21 @@
 import logo from '../images/logo.svg';
 import { Link, useRouteMatch } from 'react-router-dom';
 
-// import { appUrl } from '../utils/constants';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 
 import MenuMobile from './MenuMobile';
+
+// Контекст
+import { ValidateInput } from '../contexts/validateInput';
 
 function Header({ loggedIn, signOut }) {
   const [screenWidth, setScreenWidth] = useState(null);
   const [activeMenu, setActiveMenu] = useState(false);
+
+  const {
+    resetInputsValidationLogin,
+    resetInputsValidationReg
+  } = useContext(ValidateInput);
 
   const { url } = useRouteMatch();
 
@@ -34,13 +41,13 @@ function Header({ loggedIn, signOut }) {
   const checkUrl = () => {
     if (url === `/signup`) {
       return (
-      <Link to={`/signin`} className='header__link-auth'>
+      <Link to={`/signin`} className='header__link-auth' onClick={resetInputsValidationReg}>
         Войти
       </Link>
     )}
     else if (url === `/signin`) {
       return (
-      <Link to={`/signup`} className='header__link-auth'>
+      <Link to={`/signup`} className='header__link-auth' onClick={resetInputsValidationLogin}>
         Регистрация
       </Link>
       )}
